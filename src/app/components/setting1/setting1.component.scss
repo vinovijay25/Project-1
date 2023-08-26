@@ -1,0 +1,14 @@
+.form-control
+{
+  border: 1px rgb(218, 218, 218) solid;
+  height: 40px;
+}
+
+.form-control.is-invalid
+{
+  border: 1px #DC3545 solid;
+}
+.form-control.is-valid
+{
+  border: 1px #198754 solid;
+}

@@ -1,0 +1,439 @@
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
+const Employee = require('../models/employee');
+const Address = require('../models/address');
+
+// CREATE USER
+router.post('/', async (req, res) => {
+  try {
+    const employee = await Employee.findById(req.body.employeeId);
+    if (!employee) {
+      return res.status(400).json({ message: 'Invalid employee ID' });
+    }
+
+    const address = await Address.findById(req.body.addressId);
+    if (!address) {
+      return res.status(400).json({ message: 'Invalid address ID' });
+    }
+
+    const user = new User({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      employee: employee._id,
+      address: address._id
+    });
+
+    await user.save();
+
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET ALL USERS
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find()
+      .populate('employee')
+      .populate('address');
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET SINGLE USER
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+      .populate('employee')
+      .populate('address');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// UPDATE USER
+router.put('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const employee = await Employee.findById(req.body.employeeId);
+    if (!employee) {
+      return res.status(400).json({ message: 'Invalid employee ID' });
+    }
+
+    const address = await Address.findById(req.body.addressId);
+    if (!address) {
+      return res.status(400).json({ message: 'Invalid address ID' });
+    }
+
+    user.first_name = req.body.first_name || user.first_name;
+    user.last_name = req.body.last_name || user.last_name;
+    user.email = req.body.email || user.email;
+    user.employee = employee._id || user.employee;
+    user.address = address._id || user.address;
+
+    await user.save();
+
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// DELETE USER
+router.delete('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await user.remove();
+
+    res.json({ message: 'User removed' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+//
+module.exports = routerRoute;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const userRoute = express.Router();
+
+let Users = require('../models/User');
+// let Employee = require('../models/Employee');
+
+userRoute.route('/users').get((req, res, next) => {
+    Users.find((error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    
+}).populate([
+    {
+        path: 'Address'
+    },
+    {
+        path: 'Employee'
+    }
+]);
+});
+
+
+// userRoute.route('/user').post((req, res, next) => {
+//     Users.create(req.body, (error, data) => {
+//         if (error) {
+//             return next(error);
+//         } else {
+//             res.json(data);
+//         }
+    
+// }).populate([
+//     {
+//         path: 'Address'
+//     },
+//     {
+//         path: 'Employee'
+//     }
+// ]);
+// });
+
+
+
+userRoute.route('/user').post((req, res, next) => {
+    Users.create(req.body, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            data.populate([
+                {
+                    path: 'Address'
+                },
+                {
+                    path: 'Employee'
+                }
+            ], (err, populatedData) => {
+                if (err) {
+                    return next(err);
+                } else {
+                    res.json(populatedData);
+                }
+            });
+        }
+    });
+});
+
+
+
+
+//update record
+
+userRoute.route('/user/:id').put((req, res, next) => {
+    User.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    },
+        (error, data) => {
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data);
+            }
+        
+}).populate([
+    {
+        path: 'Address'
+    },
+    {
+        path: 'Employee'
+    }
+]);
+});
+
+//delete record
+
+userRoute.route('/user/:id').delete((req, res, next) => {
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.status(200).json({
+                message: data
+            });
+        }
+    
+}).populate([
+    {
+        path: 'Address'
+    },
+    {
+        path: 'Employee'
+    }
+]);
+
+});
+
+
+
+
+userRoute.route('/secret').get((req, res, next) => {
+    Users.find((error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    }).populate([
+        {
+            path: 'Address'
+        },
+        {
+            path: 'Employee'
+        }
+    ]);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const router = express.Router();
+const User = require('../models/User');
+
+// GET all users
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET a single user by id
+router.get('/users/:id', getUser, (req, res) => {
+  res.json(res.user);
+});
+
+// CREATE a new user
+router.post('/user', async (req, res) => {
+  const user = new User({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    Address: req.body.Address,
+    Employee: req.body.Employee
+  });
+
+  try {
+    const newUser = await user.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// UPDATE a user by id
+router.put('/user/:id', getUser, async (req, res) => {
+  if (req.body.first_name != null) {
+    res.user.first_name = req.body.first_name;
+  }
+  if (req.body.last_name != null) {
+    res.user.last_name = req.body.last_name;
+  }
+  if (req.body.email != null) {
+    res.user.email = req.body.email;
+  }
+  if (req.body.Address != null) {
+    res.user.Address = req.body.Address;
+  }
+  if (req.body.Employee != null) {
+    res.user.Employee = req.body.Employee;
+  }
+
+  try {
+    const updatedUser = await res.user.save();
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// DELETE a user by id
+router.delete('/user/:id', getUser, async (req, res) => {
+  try {
+    await res.user.remove();
+    res.json({ message: 'User deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+async function getUser(req, res, next) {
+  let user;
+  try {
+    user = await User.findById(req.params.id).populate('Address Employee');
+    if (user == null) {
+      return res.status(404).json({ message: 'Cannot find user' });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+
+  res.user = user;
+  next();
+}
+
+const userRoute = router;
+module.exports = userRoute;

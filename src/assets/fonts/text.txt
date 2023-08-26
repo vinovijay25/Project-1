@@ -1,0 +1,213 @@
+    <form [formGroup]="facilitiesRegisterForm" (ngSubmit)="registerFacilities()">
+      <app-stepper-nav></app-stepper-nav>
+      <div style="display: flex;">
+        <!-- <h3 style="color: rgb(218, 4, 4); font-weight: 600; ">Facilities</h3> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  -->
+        <h5 style="color: rgb(0, 30, 201); font-weight: 600; margin-top: 6px;">{{ Overviews?.college_name }}</h5>
+     </div>
+        <!-- <hr> -->
+        <div class="card" style="padding: 10px 10px ; margin-bottom: 20px; background-color: rgb(245, 244, 244);">
+        <ng-container>
+          
+              <input formControlName="overview_id" type="hidden" class="form-control" placeholder="overview_id">
+         
+       
+  
+              
+              
+         
+         <div class="row mt-2">
+  
+  
+            <div class="col-md-12"  style="margin-top: -8px;">
+                <label>About College Facilities</label>
+                 <textarea type="text" style="width: 97.5%; height: 128px;  margin-left: 0px;" formControlName="about" class="form-control" placeholder="about"></textarea>
+                 </div>
+  
+                 <div class="col-md-2"  style="margin-top: -8px;">
+                     <label id="1">Boys Hostel</label> &nbsp;
+                       <!-- <textarea type="text" formControlName="boys_hostel" class="form-control" placeholder="boys hostel" style="height: 128px;"></textarea> -->
+                       <input type="checkbox" for="1" formControlName="boys_hostel"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2" id="1" style="margin-top: -8px;">
+                     <label  >Girls Hostel</label> &nbsp;
+                       <!-- <textarea type="text" formControlName="girls_hostel" class="form-control" placeholder="girls hostel"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox"  formControlName="girls_hostel"   value="1">
+                      </div> 
+  
+  
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Medical/Hospital</label>
+                       <!-- <textarea type="text" formControlName="hospital" class="form-control" placeholder="hospital"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="hospital" class="form-control"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Gym</label>
+                       <!-- <textarea type="text" formControlName="gym" class="form-control" placeholder="gym"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="gym" class="form-control"  value="1">
+                      </div> 
+  
+  
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Library</label>
+                       <!-- <textarea type="text" formControlName="library" class="form-control" placeholder="library"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="library" class="form-control"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Sports</label>
+                       <!-- <textarea type="text" formControlName="sports" class="form-control" placeholder="sports" style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="sports" class="form-control"  value="1">
+                      </div> 
+  
+  
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>I.T Infrastructure</label>
+                       <!-- <textarea type="text" formControlName="it_infrastructure" class="form-control" placeholder="it_infrastructure"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="it_infrastructure" class="form-control"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Cafeteria</label>
+                       <!-- <textarea type="text" formControlName="cafitariya" class="form-control" placeholder="cafeteria"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="cafitariya" class="form-control"  value="1">
+                      </div> 
+  
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Auditorium</label>
+                       <!-- <textarea type="text" formControlName="auditorium" class="form-control" placeholder="auditorium"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="auditorium" class="form-control"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Transport Facility</label>
+                       <!-- <textarea type="text" formControlName="transport" class="form-control" placeholder="transport" style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="transport" class="form-control"  value="1">
+                      </div> 
+  
+  
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Alumni Associations</label>
+                       <!-- <textarea type="text" formControlName="alumni_assocication" class="form-control" placeholder="alumni_assocication"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="alumni_assocication" class="form-control"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Wifi</label>
+                       <!-- <textarea type="text" formControlName="wifi" class="form-control" placeholder="wifi"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="wifi" class="form-control"  value="1">
+                      </div> 
+  
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">
+                     <label>Laboratories</label>
+                       <!-- <textarea type="text" formControlName="laboratories" class="form-control" placeholder="laboratories"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="laboratories" class="form-control"  value="1">
+                      </div> 
+  
+                   <div class="col-md-2"  style="margin-top: -8px;">  
+                     <label>Guest Room/Waiting Room</label>
+                       <!-- <textarea type="text" formControlName="guest_room" class="form-control" placeholder="guest room"  style="height: 128px;"></textarea> -->
+                       <input type="checkbox" formControlName="guest_room" class="form-control"  value="1">
+                      </div> 
+  
+                   
+  <!--                        
+            <div class="col-md-6">
+              <label>Select College </label>
+                <select formControlName="college_type" class="form-control">
+                    <option value="" disabled selected>Select College Type</option>
+                    <option *ngFor="let college_type of college_types" [value]="college_type.college_type_name">{{college_type.college_type_name}}</option>
+                  </select>
+             </div>
+  
+            
+            <div class="col-md-6">
+              <label>Select University</label>
+                <select formControlName="university_type" class="form-control" >
+                    <option value="" disabled selected>Select University Type</option>
+                    <option *ngFor="let university of universities" [value]="university.university">{{university.university}}</option>
+                  </select>
+            </div>
+  
+            <div class="col-md-12" style="margin-top: -8px;">
+              <label>College Name</label>
+              <input type="text" style="width: 97.5%; margin-left: 0px;" formControlName="college_name" class="form-control" placeholder="college name">
+            </div> 
+            <br>
+            
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>College Code</label>
+                <input type="text" formControlName="college_code" class="form-control" placeholder="college code">
+            </div> 
+            
+            <div class="col-md-6"  style="margin-top: -8px;" *ngIf="isNewRecord">
+              <label>Email</label>
+              <input type="email" formControlName="email" class="form-control" placeholder="email">
+            </div>
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>City</label>
+                <input type="text" formControlName="city" class="form-control" placeholder="city">
+            </div>
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>State</label>
+                <input type="text" formControlName="state" class="form-control" placeholder="state">
+            </div>
+  
+            <div class="col-md-12"  style="margin-top: -8px;">
+              <label>About</label>
+              <textarea type="text" style="width: 97.5%; height: 128px;  margin-left: 0px;" formControlName="about" class="form-control" placeholder="about"></textarea>
+            </div>
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>Year</label>
+                <input type="text" formControlName="year" class="form-control" placeholder="year">
+            </div>
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>Total Branch</label>
+                <input type="text"  formControlName="total_branch" class="form-control" placeholder="total branch">
+            </div>
+  
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>Approved Intake</label>
+                <input type="text"  formControlName="approved_intake" class="form-control" placeholder="approved intake">
+            </div>
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>Autononous Status</label>
+                <input type="text" formControlName="autononous_stus" class="form-control" placeholder="autononous status">
+            </div>
+  
+            <div class="col-md-6"  style="margin-top: -8px;">
+              <label>Addmission Authority</label>
+                <input type="text" formControlName="addmission_auth" class="form-control" placeholder="addmission authority">
+            </div>
+  
+         
+            <div class="col-md-6" style="margin-top: -8px;">
+              <label>Upload Image</label> &nbsp;
+              <img [src]="imageUrl" *ngIf="imageUrl"  style="width: 100px; height: 100px; align-items: left;">
+              <input type="file" style="margin-top: 20px;" formControlName="image" (change)="onFileSelected($event)">
+            </div> -->
+  
+          </div>
+        </ng-container>
+  
+       <br>
+  
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <button type="button" class="btn btn-secondary" routerLink="/admin/cutoff/{{Overviews._id}}"> Back </button>
+          <button type="submit" class="btn btn-primary"> {{isNewRecord ? 'Next' : 'Update'}} </button>
+        </div>
+      </form>
